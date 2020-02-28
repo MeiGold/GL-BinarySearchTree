@@ -12,5 +12,7 @@ int main() {
     }
     std::cout << "Inorder output of the tree:" << std::endl;
     tree.inOrderOutput(tree.getRoot());
-
+    tree.deleteFromTree(tree.getRoot(),2);
+    std::cout<<"After deletion"<<std::endl;
+    tree.inOrderOutput(tree.getRoot());
 }

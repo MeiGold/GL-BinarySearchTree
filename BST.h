@@ -18,6 +18,7 @@ class BST {
 private:
     Node *root;
     void addInTree(Node *node, int value);
+    void deleteNode(Node *node);
 public:
     BST();
     BST(Node *root);
@@ -25,7 +26,7 @@ public:
     void add(int value);
     void inOrderOutput(Node *node);
     Node *getRoot();
-    void deleteNode(Node *node);
+    void deleteFromTree(Node *node, int value);
     Node *max(Node *node);
     Node *min(Node *node);
 };

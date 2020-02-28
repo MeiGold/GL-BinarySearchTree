@@ -64,7 +64,7 @@ void BST::deleteNode(Node *node) {
 void BST::deleteFromTree(Node *node, int value) {
     if(!node)return;
     Node *parent = nullptr;
-    while (node->value != value) {
+    while (node->value != value) {// find element to delete
         if (value < node->value) {
             if (node->left) {
                 parent = node;
@@ -77,40 +77,54 @@ void BST::deleteFromTree(Node *node, int value) {
             } else break;
         }
     }
-    if (node->value == value) {
-        if (!node->left && !node->right) {
+    if (node->value == value) {// will be executed only if there is such element in the tree
+        if (!node->left && !node->right) {// case 0: deleted node has 0 children
             if (parent->left == node) {
                 parent->left = nullptr;
             } else {
                 parent->right = nullptr;
             }
             delete node;
+            return;
         }
 
-        if (node->left && node->right) {
+        if (node->left && node->right) {// case 2: deleted node has 2 children
+            /* 1) We should find min from right subtree of deleted element (successor),
+             * 2) set parent of the successor to nullptr
+             * 3) then we replace node which will be deleted with successor
+             * 4) connect parent of deleted element with successor
+             * 5) set left and right nodes to newly placed successor
+             */
             Node *deleted = node;
             deleted = deleted->right;
             Node *minimum = deleted;
             Node *parentMinimum = nullptr;
-            if (deleted->left)
+            if (deleted->left)// find successor
                 while (deleted->left) {
                     minimum = deleted->left;
                     parentMinimum = deleted;
                     deleted = deleted->left;
                 }
-            if (parentMinimum)
+            if (parentMinimum)// set parent of successor to null
                 if (parentMinimum->left == deleted) {
                     parentMinimum->left = nullptr;
                 } else {
                     parentMinimum->right = nullptr;
                 }
-            if (parent->left == node) {
+            if (parent->left == node) {// connect parent of deleted with successor
                 parent->left = minimum;
             } else { //(parent->right==node)
                 parent->right = minimum;
             }
+
+            minimum->left = node->left;// set children of new node
+            if (node->right != minimum)
+                minimum->right = node->right;
+            else minimum->right = nullptr;
+
             delete node;
-        } else {
+            return;
+        } else {// case 1: deleted node has 1 child
             if (node->left) {
                 if (parent->left == node) {
                     parent->left = node->left;
@@ -127,6 +141,7 @@ void BST::deleteFromTree(Node *node, int value) {
             }
             delete node;
         }
+        return;
     }
 
 }

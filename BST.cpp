@@ -142,8 +142,8 @@ void BST::deleteFromTree(Node *node, int value) {
                 }
             }
             delete node;
+            return;
         }
-        return;
     }
 
 }

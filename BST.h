@@ -10,16 +10,8 @@ public:
     Node *left;
     Node *right;
     int value;
-    Node() {
-        this->value = 0;
-        this->left = nullptr;
-        this->right = nullptr;
-    }
-    Node(int value) {
-        this->value = value;
-        this->left = nullptr;
-        this->right = nullptr;
-    }
+    Node():left(nullptr),right(nullptr),value(0){}
+    Node(int value):left(nullptr),right(nullptr),value(value){}
 };
 
 class BST {
@@ -31,7 +23,7 @@ public:
     BST(Node *root);
     Node *getRoot();
     void add(int value);
-    void inorderOutput(Node *node);
+    void inOrderOutput(Node *node);
 };
 
 

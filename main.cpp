@@ -11,5 +11,5 @@ int main() {
         std::cin >> elem;
     }
     std::cout << "Inorder output of the tree:" << std::endl;
-    tree.inorderOutput(tree.getRoot());
+    tree.inOrderOutput(tree.getRoot());
 }

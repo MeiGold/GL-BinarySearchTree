@@ -5,16 +5,12 @@
 #include "BST.h"
 #include <iostream>
 
-BST::BST(){
-    root = nullptr;
-}
+BST::BST():root(nullptr){}
 
-BST::BST (Node* root){
-    this->root = root;
-}
+BST::BST (Node* root):root(root){}
 
 Node* BST::getRoot(){
-    return this->root;
+    return root;
 }
 
 void BST::add(int value){
@@ -24,11 +20,11 @@ void BST::add(int value){
     else addInTree(root,value);
 }
 
-void BST::inorderOutput(Node* node){
+void BST::inOrderOutput(Node* node){
     if(!node)return;
-    if(node->left)inorderOutput(node->left);
+    if(node->left)inOrderOutput(node->left);
     std::cout<<node->value<<std::endl;
-    if(node->right)inorderOutput(node->right);
+    if(node->right)inOrderOutput(node->right);
 }
 
 void BST::addInTree(Node* node, int value){

@@ -95,26 +95,27 @@ void BST::deleteFromTree(Node *node, int value) {
              * 4) connect parent of deleted element with successor
              * 5) set left and right nodes to newly placed successor
              */
-            Node *deleted = node;
-            deleted = deleted->right;
-            Node *minimum = deleted;
+
+            Node *minimum = node->right;
             Node *parentMinimum = nullptr;
-            if (deleted->left)// find successor
-                while (deleted->left) {
-                    minimum = deleted->left;
-                    parentMinimum = deleted;
-                    deleted = deleted->left;
+            if (minimum->left)// find successor
+                while (minimum->left) {
+                    parentMinimum = minimum;
+                    minimum = minimum->left;
+
                 }
             if (parentMinimum)// set parent of successor to null
-                if (parentMinimum->left == deleted) {
+                if (parentMinimum->left == minimum) {
                     parentMinimum->left = nullptr;
                 } else {
                     parentMinimum->right = nullptr;
                 }
-            if (parent->left == node) {// connect parent of deleted with successor
-                parent->left = minimum;
-            } else { //(parent->right==node)
-                parent->right = minimum;
+            if (parent) {
+                if (parent->left == node) {// connect parent of deleted with successor
+                    parent->left = minimum;
+                } else { //(parent->right==node)
+                    parent->right = minimum;
+                }
             }
 
             minimum->left = node->left;// set children of new node
@@ -122,6 +123,7 @@ void BST::deleteFromTree(Node *node, int value) {
                 minimum->right = node->right;
             else minimum->right = nullptr;
 
+            if (!parent) root = minimum;// if deleted element is root
             delete node;
             return;
         } else {// case 1: deleted node has 1 child

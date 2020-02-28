@@ -10,8 +10,10 @@ int main() {
         tree.add(elem);
         std::cin >> elem;
     }
-    std::cout << "Inorder output of the tree:" << std::endl;
+    std::cout << "InOrder output of the tree:" << std::endl;
     if (tree.getRoot())
         tree.inOrderOutput(tree.getRoot());
-
+    tree.deleteFromTree(tree.getRoot(), 7);
+    std::cout << "After deletion:" << std::endl;
+    tree.inOrderOutput(tree.getRoot());
 }

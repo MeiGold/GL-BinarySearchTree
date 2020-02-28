@@ -21,9 +21,13 @@ private:
 public:
     BST();
     BST(Node *root);
-    Node *getRoot();
+    ~BST();
     void add(int value);
     void inOrderOutput(Node *node);
+    Node *getRoot();
+    void deleteNode(Node *node);
+    Node *max(Node *node);
+    Node *min(Node *node);
 };
 
 

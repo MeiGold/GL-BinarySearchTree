@@ -12,4 +12,5 @@ int main() {
     }
     std::cout << "Inorder output of the tree:" << std::endl;
     tree.inOrderOutput(tree.getRoot());
+
 }

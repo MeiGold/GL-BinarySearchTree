@@ -48,3 +48,35 @@ void BST::addInTree(Node* node, int value){
         }
     }
 }
+
+void BST::deleteNode(Node *node) {
+    if(node){
+        deleteNode(node->left);
+        deleteNode(node->right);
+        delete node;
+    }
+}
+
+BST::~BST() {
+    deleteNode(root);
+}
+
+Node *BST::max(Node *node) {
+    if (!node)return nullptr;
+    Node *maximum = nullptr;
+    while (node->right) {
+        maximum = node->right;
+        node = node->right;
+    }
+    return maximum;
+}
+
+Node *BST::min(Node *node) {
+    if(!node)return nullptr;
+    Node *minimum = nullptr;
+    while (node->left) {
+        minimum = node->left;
+        node = node->left;
+    }
+    return minimum;
+}
